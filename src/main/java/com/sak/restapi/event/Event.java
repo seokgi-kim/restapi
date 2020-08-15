@@ -2,6 +2,7 @@ package com.sak.restapi.event;
 
 import lombok.*;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Builder
@@ -10,8 +11,11 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @EqualsAndHashCode(of = "id")
+@Entity
 public class Event {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String name;
     private String description;
@@ -26,6 +30,8 @@ public class Event {
 
     private boolean offline;
     private boolean free;
-    private EventStatus eventStatus = EventStatus.DRAFT;
+
+    @Enumerated(EnumType.STRING)
+    private EventStatus eventStatus;
 
 }
